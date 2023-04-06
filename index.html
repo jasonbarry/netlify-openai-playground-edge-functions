@@ -109,7 +109,7 @@
     <div x-data="app()" class="app">
       <!-- Container for chat messages -->
       <div class="chat-container">
-        <h1 style="text-align: center;">ChatGPT via Netlify Edge Functions</h1>
+        <h1 style="text-align: center">ChatGPT via Netlify Edge Functions</h1>
         <h4>
           Flow: Client(Alpine.js)->Netlify Edge Functions->OpenAI Chat
           Completion API(GPT3.5) [Streaming]
@@ -171,8 +171,7 @@
 
             // Create URL for the streaming edge function
             const urlObject = new URL(document.URL);
-            const apiUrl =
-              urlObject.protocol + "//" + urlObject.host + "/streaming";
+            const apiUrl = urlObject.protocol + "//" + urlObject.host + "/chat";
             console.log(apiUrl);
             // Make request to Streaming Edge Function
             try {

@@ -1,3 +1,6 @@
 [[edge_functions]]
-  path = "/streaming"
-  function = "streaming-chat-openai"
+  path = "/chat"
+  function = "chat"
+
+[template.environment]
+  OPENAI_API_KEY = "Your OpenAI API key goes here"
