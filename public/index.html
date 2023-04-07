@@ -170,9 +170,7 @@
             this.chatResponse = "";
 
             // Create URL for the streaming edge function
-            const urlObject = new URL(document.URL);
-            const apiUrl = urlObject.protocol + "//" + urlObject.host + "/chat";
-            console.log(apiUrl);
+            const apiUrl = "/chat";
             // Make request to Streaming Edge Function
             try {
               const response = await fetch(apiUrl, {
@@ -181,7 +179,12 @@
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  message: this.message,
+                  messages: [
+                    {
+                      role: "user",
+                      content: this.message,
+                    },
+                  ],
                   stream: this.isChecked,
                 }),
               });
