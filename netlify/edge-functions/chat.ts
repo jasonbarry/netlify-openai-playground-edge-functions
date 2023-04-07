@@ -1,28 +1,16 @@
 import type { Config, Context } from "netlify:edge";
 
-interface Params {
-  model?: "gpt-4" | "gpt-3.5-turbo";
-  messages: Array<{
-    role: "system" | "user" | "assistant";
-    content: string;
-  }>;
-  max_tokens?: number;
-  temperature?: number;
-  top_p?: number;
-  frequency_penalty?: number;
-  presence_penalty?: number;
-  stream?: boolean;
-}
+import type { ChatRequestBody } from "../../src/interfaces";
 
 export default async (req: Request, context: Context) => {
   const text = await req.text();
-  const params: Params = JSON.parse(text);
+  const params: ChatRequestBody = JSON.parse(text);
 
   const API_URL = "https://api.openai.com/v1/chat/completions";
   // @ts-expect-error
   const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
 
-  const bodyParams: Params = {
+  const bodyParams: ChatRequestBody = {
     model: params.model || "gpt-3.5-turbo",
     messages: params.messages,
     max_tokens: params.max_tokens || 256,
@@ -30,7 +18,6 @@ export default async (req: Request, context: Context) => {
     top_p: params.top_p || 1,
     frequency_penalty: params.frequency_penalty || 0,
     presence_penalty: params.presence_penalty || 0,
-    stream: params.stream ?? true,
   };
 
   const requestOptions = {
@@ -39,7 +26,7 @@ export default async (req: Request, context: Context) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${OPENAI_API_KEY}`,
     },
-    body: JSON.stringify(bodyParams),
+    body: JSON.stringify({ ...bodyParams, stream: true }),
   };
 
   console.log("calling OpenAI API: " + JSON.stringify(bodyParams));
