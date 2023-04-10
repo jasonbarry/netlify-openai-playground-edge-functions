@@ -4,7 +4,7 @@ Easily integrate your site with OpenAI APIs -- including those that stream respo
 
 In just a few clicks (it takes less than 5 minutes, seriously!) you can incorporate ChatGPT-like functionality on a site that you own.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify/openai-edge-functions)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify/openai-playground-edge-functions)
 
 This repo is built to show the power of Netlify Edge Functions and how easy its to build streaming applications.
 
