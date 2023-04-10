@@ -32,6 +32,7 @@ function App() {
     setEndpoint(value);
     setParams(getParameterDefaultValues(value));
     setAiMessage("");
+    setAiImages([]);
   };
 
   const handleChange = (key: string, value: string | number) => {
@@ -111,8 +112,17 @@ function App() {
 
   return (
     <div className="playground">
-      <header>
+      <header className="flex space-between">
         <h1>OpenAI API Playground powered by Netlify Edge Functions</h1>
+        <a
+          href="https://app.netlify.com/start/deploy?repository=https://github.com/netlify/openai-edge-functions"
+          target="_blank"
+        >
+          <img
+            alt="Deploy to Netlify"
+            src="https://www.netlify.com/img/deploy/button.svg"
+          />
+        </a>
       </header>
       <div className="chat-container">
         <Select
