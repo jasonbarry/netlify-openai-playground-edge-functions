@@ -1,0 +1,12 @@
+.textarea {
+  flex-grow: 1;
+}
+
+.textarea textarea {
+  border-radius: 4px;
+  cursor: text;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  padding: 16px;
+  scroll-behavior: auto;
+  width: calc(100% - 48px);
+}

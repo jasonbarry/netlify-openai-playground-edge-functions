@@ -1,24 +1,41 @@
 import { useState } from "react";
+import "./Select.css";
 
 interface Props {
   label: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  options: string[];
+  onChange: (key: string, value: string) => void;
+  options:
+    | string[]
+    | Array<{
+        label: string;
+        value: string;
+      }>;
   value: string;
 }
 
 function Select(props: Props) {
   const { label, onChange, options, value } = props;
 
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const key = label.toLowerCase().replace(/ /g, "_");
+    onChange(key, e.target.value);
+  };
+
   return (
-    <label>
+    <label className="select">
       <div>
-        <span>{label}</span>
+        <code>{label}</code>
       </div>
-      <select onChange={onChange} value={value}>
-        {options.map((option) => (
-          <option key={option}>{option}</option>
-        ))}
+      <select onChange={handleChange} value={value}>
+        {options.map((option) =>
+          typeof option === "string" ? (
+            <option key={option}>{option}</option>
+          ) : (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          )
+        )}
       </select>
     </label>
   );

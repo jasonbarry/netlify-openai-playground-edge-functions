@@ -1,25 +1,29 @@
 import { useState } from "react";
 
+import "./Range.css";
+
 interface Props {
   label: string;
+  title?: string;
   max: number;
   min: number;
   step: number;
-  onChange: (number: number) => void;
+  onChange: (key: string, value: number) => void;
   value: number;
 }
 
 function Range(props: Props) {
-  const { label, onChange, ...rest } = props;
+  const { label, title, onChange, ...rest } = props;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(Number(e.target.value));
+    const key = label.toLowerCase().replace(/ /g, "_");
+    onChange(key, Number(e.target.value));
   };
 
   return (
-    <label>
+    <label className="range">
       <div className="flex">
-        <span>{label}</span>
+        <code title={title}>{label}</code>
         <input type="number" {...rest} onChange={handleChange} />
       </div>
       <input type="range" {...rest} onChange={handleChange} />

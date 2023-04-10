@@ -1,5 +1,5 @@
 export type Model = {
-  Complete:
+  Completion:
     | "ada"
     | "babbage"
     | "chat-davinci-003-alpha"
@@ -26,10 +26,12 @@ export interface BaseRequestBody {
   frequency_penalty?: number;
   presence_penalty?: number;
   stop?: string[];
+  stream?: boolean;
+  user?: string;
 }
 
-export interface Complete extends BaseRequestBody {
-  model: Model["Complete"];
+export interface Completion extends BaseRequestBody {
+  model: Model["Completion"];
   prompt: string;
   suffix?: string;
 }
@@ -42,12 +44,19 @@ export interface Chat extends Omit<BaseRequestBody, "stop"> {
   }>;
 }
 
-export interface Edit
-  extends Omit<
-    BaseRequestBody,
-    "max_tokens" | "frequency_penalty" | "presence_penalty"
-  > {
-  model: Model["Edit"];
+export interface Edit {
   input: string;
   instruction: string;
+  model: Model["Edit"];
+  temperature?: number;
+  top_p?: number;
+  user?: string;
+}
+
+export interface Image {
+  prompt: string;
+  size?: "256x256" | "512x512" | "1024x1024";
+  n?: number;
+  response_format?: "b64_json" | "url";
+  user?: string;
 }

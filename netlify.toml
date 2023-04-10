@@ -1,9 +1,5 @@
 [build]
   publish = "public"
 
-[[edge_functions]]
-  path = "/chat"
-  function = "chat"
-
 [template.environment]
   OPENAI_API_KEY = "Your OpenAI API key goes here"

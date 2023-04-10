@@ -1,0 +1,12 @@
+.range .flex {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.range input[type="number"] {
+  max-width: 56px;
+}
+
+.range input[type="range"] {
+  width: 90%;
+}

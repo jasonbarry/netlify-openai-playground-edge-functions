@@ -1,14 +1,11 @@
 import openaiHandler from "https://deno.land/x/openai_handler@0.0.2/mod.ts";
 import type { Config } from "https://edge.netlify.com";
 
-import type { Chat } from "../../src/interfaces";
+import type { Completion } from "../../src/interfaces";
 
-const defaultParams: Chat = {
-  model: "gpt-3.5-turbo",
-  messages: [
-    { role: "system", content: "You are a helpful assistant." },
-    { role: "user", content: "Hello!" },
-  ],
+const defaultParams: Completion = {
+  model: "text-davinci-003",
+  prompt: "Write a tagline for an ice cream shop. ",
   temperature: 0.7,
   max_tokens: 256,
   top_p: 1,
@@ -18,14 +15,14 @@ const defaultParams: Chat = {
 };
 
 export default async (req: Request) => {
-  const userParams: Chat = await req.json();
+  const userParams: Completion = await req.json();
 
-  return await openaiHandler("/v1/chat/completions", {
+  return await openaiHandler("/v1/completions", {
     ...defaultParams,
     ...userParams,
   });
 };
 
 export const config: Config = {
-  path: "/api/openai/chat",
+  path: "/api/openai/completion",
 };
