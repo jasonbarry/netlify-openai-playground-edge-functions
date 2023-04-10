@@ -88,7 +88,6 @@ function App() {
       setError("");
 
       if (params.stream) {
-        console.log("reading stream");
         readStream(response, setAiMessage);
       } else {
         const json = await response.json();

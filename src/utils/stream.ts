@@ -19,7 +19,6 @@ export const readStream = async (
     const chunks = valueText.split(/^data: |\ndata: /).slice(1);
     for (const chunk of chunks) {
       try {
-        console.log(chunk);
         const json = JSON.parse(chunk);
         const text = getTextFromPayload(json);
         if (text) {
