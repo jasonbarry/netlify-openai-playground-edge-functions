@@ -66,7 +66,7 @@ export const getTextInputsForEndpoint = (endpoint: string) => {
       defaultValue: "",
       props: {
         label: "prompt",
-        placeholder: "Write a tagline for an ice cream shop. ",
+        placeholder: "Enter a prompt here.",
         title:
           "The prompt(s) to generate completions for, encoded as a string, array of strings, array of tokens, or array of token arrays.",
         style: { height: "calc(100vh - 240px)" },

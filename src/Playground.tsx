@@ -24,6 +24,7 @@ function App() {
     getParameterDefaultValues("/api/openai/chat")
   );
   const [aiMessage, setAiMessage] = useState("");
+  const [aiImages, setAiImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -40,6 +41,7 @@ function App() {
   const sendMessage = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setAiMessage("");
+    setAiImages([]);
     setLoading(true);
 
     // chat constructs messages in an array, so we special-case this a bit
@@ -91,9 +93,15 @@ function App() {
         readStream(response, setAiMessage);
       } else {
         const json = await response.json();
-        const text = getTextFromPayload(json);
-        if (text) {
-          setAiMessage((message) => `${message}${text}`);
+        // first check if this is the image response
+        if (Array.isArray(json.data)) {
+          const images = json.data.map((datum: any) => Object.values(datum)[0]);
+          setAiImages(images);
+        } else {
+          const text = getTextFromPayload(json);
+          if (text) {
+            setAiMessage((message) => `${message}${text}`);
+          }
         }
       }
     } catch (err) {
@@ -152,7 +160,7 @@ function App() {
                   className="readonly"
                   style={{ height: "calc(100vh - 240px)" }}
                 >
-                  {!aiMessage && !loading && (
+                  {!aiMessage && aiImages.length === 0 && !loading && (
                     <span style={{ color: "gray" }}>
                       OpenAI's response will appear here.
                     </span>
@@ -161,6 +169,16 @@ function App() {
                     <span style={{ color: "gray" }}>Loading...</span>
                   )}
                   {aiMessage}
+                  {aiImages.map((url) => (
+                    <a key={url} href={url} target="_blank">
+                      <img
+                        alt={params.prompt}
+                        height={128}
+                        src={url}
+                        width={128}
+                      />
+                    </a>
+                  ))}
                 </div>
               </div>
             </div>
