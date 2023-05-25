@@ -115,7 +115,7 @@ function App() {
       <header className="flex space-between">
         <h1>OpenAI API Playground powered by Netlify Edge Functions</h1>
         <a
-          href="https://app.netlify.com/start/deploy?repository=https://github.com/netlify/openai-playground-edge-functions"
+          href="https://app.netlify.com/start/deploy?repository=https://github.com/jasonbarry/netlify-openai-playground-edge-functions"
           target="_blank"
         >
           <img
