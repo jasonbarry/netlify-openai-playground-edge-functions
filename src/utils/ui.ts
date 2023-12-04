@@ -33,7 +33,7 @@ const modelsForEndpoint = {
     "ada",
     "chat-davinci-003-alpha",
   ],
-  [CHAT]: ["gpt-3.5-turbo", "gpt-4"],
+  [CHAT]: ["gpt-4-1106-preview", "gpt-4", "gpt-3.5-turbo"],
   [EDIT]: ["text-davinci-edit-001", "code-davinci-edit-001"],
 };
 
